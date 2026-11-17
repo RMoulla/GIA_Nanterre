@@ -76,7 +76,7 @@ Ces deux notebooks expliquent comment adapter `google/gemma-4-E2B-it` à la clas
 
 ### Utilisation
 
-1. Ouvrir le premier notebook dans Colab et choisir un environnement avec GPU T4. Disposer d'un compte Hugging Face ayant accès au modèle Gemma et suivre la cellule de connexion.
+1. Ouvrir le premier notebook dans Colab et choisir un environnement avec GPU T4. Le modèle est téléchargé depuis Hugging Face sans connexion obligatoire.
 2. Exécuter les cellules dans l'ordre et télécharger `gemma4_massive_fr_1000_resultats.zip`. Cette archive contient notamment l'adaptateur entraîné, le tokenizer et la consigne de classification.
 3. Ouvrir le deuxième notebook dans un environnement Colab avec un T4 libre et importer cette archive lorsqu'elle est demandée. Exécuter la fusion, puis la section **Conversion au format GGUF utilisable avec Ollama**. Prévoir environ 30 Go d'espace disque supplémentaire pour la conversion.
 4. Télécharger `gemma4_massive_fr_ollama.zip`, puis suivre les commandes du notebook dans le Terminal de l'ordinateur où Ollama est installé. L'archive contient le GGUF quantifié et le `Modelfile`.
