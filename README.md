@@ -17,12 +17,15 @@ Vous trouverez ici le support de cours, les exercices et les données pour repre
 | Données immobilières | [selogerdata.csv](selogerdata.csv) |
 | Données de désabonnement client | [customer_churn.csv](customer_churn.csv) |
 | Catalogue du TP Agents | [products.csv](products.csv) |
+| Fine-tuning de Gemma 4 avec QLoRA | [Lire le notebook](Gemma4_E2B_MASSIVE_FR_1000_QLoRA_T4.ipynb) · [Ouvrir dans Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Gemma4_E2B_MASSIVE_FR_1000_QLoRA_T4.ipynb) |
+| Fusion et export GGUF pour Ollama | [Lire le notebook](Fusion_Gemma4_MASSIVE_Colab.ipynb) · [Ouvrir dans Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Fusion_Gemma4_MASSIVE_Colab.ipynb) |
+| Script de prédiction avec l’adaptateur | [predict_gemma4_massive.py](predict_gemma4_massive.py) |
 
 ## Télécharger les fichiers et préparer Colab
 
 Ouvrez le fichier souhaité, puis cliquez sur **Download raw file** dans GitHub. Conservez son nom et son extension, sauf pour le PDF du TP RAG, à renommer comme indiqué ci-dessous.
 
-Pour les notebooks, ouvrez le lien Colab, choisissez **Fichier → Enregistrer une copie dans Drive**, puis connectez-vous à un environnement **Python 3 avec CPU**. Aucun GPU n’est nécessaire. Exécutez les cellules de haut en bas avec **Maj + Entrée**.
+Pour les notebooks, ouvrez le lien Colab, choisissez **Fichier → Enregistrer une copie dans Drive**, puis connectez-vous à un environnement **Python 3 avec CPU** pour les TP RAG et Agents. Pour le fine-tuning et la fusion, sélectionnez un **GPU T4**. Exécutez les cellules de haut en bas avec **Maj + Entrée**.
 
 Pour les TP RAG et Agents, ajoutez `OPENAI_API_KEY` dans les **Secrets** de Colab et autorisez le notebook à y accéder. Ces TP utilisent `gpt-4o` ; le workflow n8n utilise `gpt-4o-mini`. Une clé valide, l’accès au modèle et un quota API disponible sont nécessaires. Les appels API peuvent être facturés. Conservez la clé dans les secrets, sans l’écrire dans le notebook.
 
@@ -60,6 +63,31 @@ Après le message **Agent prêt.**, réexécutez uniquement la dernière cellule
 - « Montre-moi mon panier. »
 
 La sortie affiche les appels MCP, les résultats des outils et les réponses de Buddy. Le panier est une simulation. Réexécuter la section 2 le vide ; réexécuter la section 6 réinitialise l’historique de conversation. Les prix conservent le format du catalogue, sans supposer leur devise.
+
+## Fine-tuning de Gemma 4 sur MASSIVE en français
+
+
+Ces deux notebooks expliquent comment adapter `google/gemma-4-E2B-it` à la classification d'intentions, puis préparer le modèle pour Ollama. Ils s'utilisent dans l'ordre suivant :
+
+| Étape | Notebook | Exécuter dans Colab |
+|---|---|---|
+| 1. Entraîner avec QLoRA sur 1 000 exemples français de MASSIVE, sur un GPU T4 | [Entraînement QLoRA](Gemma4_E2B_MASSIVE_FR_1000_QLoRA_T4.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Gemma4_E2B_MASSIVE_FR_1000_QLoRA_T4.ipynb) |
+| 2. Fusionner l'adaptateur avec le modèle de base, convertir en GGUF et quantifier en Q4_K_M pour Ollama | [Fusion et conversion GGUF](Fusion_Gemma4_MASSIVE_Colab.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Fusion_Gemma4_MASSIVE_Colab.ipynb) |
+
+### Utilisation
+
+1. Ouvrir le premier notebook dans Colab et choisir un environnement avec GPU T4. Disposer d'un compte Hugging Face ayant accès au modèle Gemma et suivre la cellule de connexion.
+2. Exécuter les cellules dans l'ordre et télécharger `gemma4_massive_fr_1000_resultats.zip`. Cette archive contient notamment l'adaptateur entraîné, le tokenizer et la consigne de classification.
+3. Ouvrir le deuxième notebook dans un environnement Colab avec un T4 libre et importer cette archive lorsqu'elle est demandée. Exécuter la fusion, puis la section **Conversion au format GGUF utilisable avec Ollama**. Prévoir environ 30 Go d'espace disque supplémentaire pour la conversion.
+4. Télécharger `gemma4_massive_fr_ollama.zip`, puis suivre les commandes du notebook dans le Terminal de l'ordinateur où Ollama est installé. L'archive contient le GGUF quantifié et le `Modelfile`.
+
+Les notebooks installent leurs dépendances et téléchargent les données nécessaires. L'archive produite par le premier sert d'entrée au second ; aucun script compagnon n'est nécessaire. Le modèle apprend à renvoyer une étiquette d'intention MASSIVE.
+
+Le script facultatif [predict_gemma4_massive.py](predict_gemma4_massive.py), mentionné dans le premier notebook, permet aussi de charger l'adaptateur pour prédire une intention dans un environnement GPU disposant des mêmes dépendances.
+
+### Vérification
+
+Le code a été contrôlé localement : format des notebooks, syntaxe, préparation des données, tokenisation et génération des fichiers d'export. La version pédagogique n'a pas été réexécutée intégralement sur GPU. La fusion complète, la conversion des poids en GGUF et l'inférence dans Ollama restent à exécuter ; aucun modèle GGUF préconstruit n'est fourni dans ce dépôt.
 
 ## En cas de difficulté
 
