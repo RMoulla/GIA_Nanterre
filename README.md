@@ -1,74 +1,79 @@
 # GIA — Nanterre
 
-Actemium training — 10, 12 and 13 November 2026 — Redha Moulla.
+**Formation Actemium — 10, 12 et 13 novembre 2026 — Redha Moulla**
 
-The course slides are in French. Practical exercises and supporting guides are available in French and English. This repository uses the same labs and resources as IAO_Syn, including the original RAG correction.
+Vous trouverez ici le support de cours, les exercices et les données pour reprendre les travaux pratiques de la formation.
 
-## Resources
+## Ressources
 
-| Resource | English | French |
-| --- | --- | --- |
-| Course slides — Nanterre, 10, 12 and 13 November 2026 | — | [PDF](GIA_Actemium_Nanterre_10_12_13_novembre_2026.pdf) |
-| Prompting lab | [Notebook](TP_Prompting_English.ipynb) · [Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/TP_Prompting_English.ipynb) | [Notebook](TP_Prompting.ipynb) |
-| From needs to specifications | [Skill](SKILL_EN.md) | [Skill](SKILL.md) |
-| User story quality audit — n8n | [Workflow](Audit_User_Story_EN.json) | [Workflow](Audit_User_Story.json) |
-| RAG correction | [Notebook](TP_RAG_Correction_EN.ipynb) · [Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/TP_RAG_Correction_EN.ipynb) | [Notebook](TP_RAG_Correction.ipynb) |
-| E-commerce agent with MCP | [Notebook](Copie_de_TP_Agent_LLM_EN.ipynb) · [Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Copie_de_TP_Agent_LLM_EN.ipynb) | [Notebook](Copie_de_TP_Agent_LLM.ipynb) |
-| Real-estate dataset | [CSV](selogerdata.csv) · [English data guide](DATA_EN.md) | Same source dataset |
-| Customer churn dataset | [CSV](customer_churn.csv) | Same source dataset |
-| Product catalogue (already in English) | [CSV](products.csv) | Same source dataset |
-
-
-## Download and prepare
-
-Open a file, then select **Download raw file** on GitHub. Preserve filenames and extensions. For Colab, open the link, choose **File → Save a copy in Drive**, connect to a Python 3 CPU runtime, and run cells from top to bottom with **Shift + Enter**. No GPU is required.
-
-For RAG and Agents, add `OPENAI_API_KEY` to **Secrets** in the Colab sidebar and enable notebook access. The notebooks use `gpt-4o`; the n8n workflow uses `gpt-4o-mini`. A valid API key, model access and available API quota are required. API calls may incur charges. Keep your key in Secrets rather than notebook code.
-
-## Prompting and specifications
-
-The Prompting lab contains four exercises: writing and revising a LinkedIn post, comparing prompt tone, extracting structured JSON and analysing a dataset. Copy the prompts into your AI assistant; this lab has no code to execute. For exercise 4, attach `selogerdata.csv` and consult the English data guide for the original column names.
-
-Use `SKILL_EN.md` in a tool that supports Skills, or attach its content to your assistant and ask it to apply the method. It guides an interview of at most five questions and produces specifications with acceptance criteria.
-
-## User story audit with n8n
-
-1. Download and import `Audit_User_Story_EN.json` into n8n.
-2. Select your own OpenAI credentials in **LLM API Call**. No credentials are included.
-3. Start a test run and open **User Story Form**.
-4. Submit a title and description. Review the five criterion scores, verdict and suggestions.
-
-The result supports a human review; it is not a substitute for it.
-
-## RAG lab
-
-Download the course PDF from the table and upload it to your Colab session. The course PDF is in French; you may also use an English text-based PDF with the English notebook. Opening a notebook does not upload the PDF automatically. Use a selectable-text PDF: this lab does not perform OCR.
-
-For **RAG correction**, run extraction and chunking, embeddings, retrieval, then answer generation. Rename the downloaded course PDF to `Cours.pdf` before uploading it: this is the filename expected by the original correction and its English translation. Change `query` and rerun retrieval and generation to try another question. Use a dedicated Colab runtime: this source lab retains `openai==0.28`. Only the final generation stage needs the API key.
-
-
-## Agent lab
-
-Download `products.csv` and run sections 1–7 in order. Upload the CSV when prompted. The lab uses the first 1,000 products, builds a FAISS index and creates an MCP server. Check that tool discovery lists `search_products`, `add_to_cart` and `view_cart`.
-
-After “Agent ready.”, rerun only the final cell for each request:
-
-- “I am looking for black men's track pants.”
-- “Add two of the first product to my cart.”
-- “Show me my cart.”
-
-The output shows MCP calls, tool results and Buddy's replies. The cart is a simulation. Rerunning section 2 empties it; rerunning section 6 resets conversation history. Prices retain the source catalogue format; no currency is assumed.
-
-## Troubleshooting
-
-| Problem | Action |
+| Ressource | Accès |
 | --- | --- |
-| Missing secret or access denied | Check the exact name `OPENAI_API_KEY` and enable notebook access. |
-| Authentication or quota error | Check your API key, model access and API quota. |
-| No PDF pages or chunks | Upload a text-based PDF into `/content/`, then rerun loading and indexing. |
-| Missing `products.csv` | Upload the file with its exact name, without `(1)` or `.txt`. |
-| Unknown variable or import error | Resume in order from the first failing cell; restart the runtime when required. |
+| Support de cours de Nanterre | [Ouvrir le PDF](GIA_Actemium_Nanterre_10_12_13_novembre_2026.pdf) |
+| TP Prompting | [Lire le notebook](TP_Prompting.ipynb) · [Ouvrir dans Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/TP_Prompting.ipynb) |
+| Skill : du besoin aux spécifications | [SKILL.md](SKILL.md) |
+| Audit de user stories avec n8n | [Workflow à importer](Audit_User_Story.json) |
+| TP RAG — correction | [Lire le notebook](TP_RAG_Correction.ipynb) · [Ouvrir dans Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/TP_RAG_Correction.ipynb) |
+| TP Agents — assistant e-commerce avec MCP | [Lire le notebook](Copie_de_TP_Agent_LLM.ipynb) · [Ouvrir dans Colab](https://colab.research.google.com/github/RMoulla/GIA_Nanterre/blob/main/Copie_de_TP_Agent_LLM.ipynb) |
+| Données immobilières | [selogerdata.csv](selogerdata.csv) |
+| Données de désabonnement client | [customer_churn.csv](customer_churn.csv) |
+| Catalogue du TP Agents | [products.csv](products.csv) |
 
-Your saved notebook remains in Drive. Uploaded files and installed packages belong to the temporary Colab runtime; upload and install again after a reset.
+## Télécharger les fichiers et préparer Colab
 
-Contact: **redha.moulla@axia-conseil.com**. Further reading: [Courants de fond](https://redhamoulla.substack.com).
+Ouvrez le fichier souhaité, puis cliquez sur **Download raw file** dans GitHub. Conservez son nom et son extension, sauf pour le PDF du TP RAG, à renommer comme indiqué ci-dessous.
+
+Pour les notebooks, ouvrez le lien Colab, choisissez **Fichier → Enregistrer une copie dans Drive**, puis connectez-vous à un environnement **Python 3 avec CPU**. Aucun GPU n’est nécessaire. Exécutez les cellules de haut en bas avec **Maj + Entrée**.
+
+Pour les TP RAG et Agents, ajoutez `OPENAI_API_KEY` dans les **Secrets** de Colab et autorisez le notebook à y accéder. Ces TP utilisent `gpt-4o` ; le workflow n8n utilise `gpt-4o-mini`. Une clé valide, l’accès au modèle et un quota API disponible sont nécessaires. Les appels API peuvent être facturés. Conservez la clé dans les secrets, sans l’écrire dans le notebook.
+
+## Prompting et spécifications
+
+Le TP Prompting propose quatre exercices : rédiger et réviser un post LinkedIn, comparer l’effet du ton d’un prompt, extraire des informations en JSON et analyser un jeu de données. Copiez les consignes dans votre assistant IA : ce notebook ne contient pas de code à exécuter. Pour l’exercice 4, joignez `selogerdata.csv` à la conversation.
+
+Utilisez `SKILL.md` dans un outil prenant en charge les Skills, ou joignez son contenu à votre assistant en lui demandant d’appliquer la méthode. Il guide un entretien de cinq questions maximum pour produire une spécification avec des critères d’acceptation.
+
+## Audit de user stories avec n8n
+
+1. Téléchargez et importez `Audit_User_Story.json` dans n8n.
+2. Sélectionnez vos propres identifiants OpenAI dans le nœud **Appel API LLM**. Aucun identifiant n’est inclus dans le workflow.
+3. Lancez une exécution de test et ouvrez le **Formulaire US**.
+4. Saisissez le titre et la description d’une user story, puis consultez les cinq critères, le score et les suggestions.
+
+Le diagnostic sert de point de départ à une revue humaine.
+
+## TP RAG — correction
+
+Téléchargez le support de cours, **renommez-le `Cours.pdf`**, puis importez-le dans les fichiers de votre session Colab. Ouvrir le notebook n’importe pas automatiquement le PDF. Utilisez un PDF dont le texte est sélectionnable : ce TP ne fait pas de reconnaissance de texte sur les scans.
+
+Exécutez dans l’ordre l’extraction et la segmentation, le calcul des embeddings, la recherche des passages similaires, puis la génération de la réponse. Modifiez `query` et relancez la recherche et la génération pour poser une autre question.
+
+Utilisez une session Colab dédiée : le TP conserve `openai==0.28`. Seule la dernière étape utilise la clé API. Les passages sélectionnés et votre question sont transmis à l’API ; comparez la réponse avec le document source.
+
+## TP Agents
+
+Téléchargez `products.csv` et exécutez les sections 1 à 7 dans l’ordre. Importez le CSV lorsque le sélecteur apparaît. Le TP utilise les 1 000 premiers produits, construit un index FAISS et crée un serveur MCP. Vérifiez que la découverte des outils affiche `search_products`, `add_to_cart` et `view_cart`.
+
+Après le message **Agent prêt.**, réexécutez uniquement la dernière cellule pour chaque demande :
+
+- « Je cherche un pantalon de sport noir pour homme. »
+- « Ajoute deux exemplaires du premier produit au panier. »
+- « Montre-moi mon panier. »
+
+La sortie affiche les appels MCP, les résultats des outils et les réponses de Buddy. Le panier est une simulation. Réexécuter la section 2 le vide ; réexécuter la section 6 réinitialise l’historique de conversation. Les prix conservent le format du catalogue, sans supposer leur devise.
+
+## En cas de difficulté
+
+| Problème | Action |
+| --- | --- |
+| Secret introuvable ou accès refusé | Vérifiez le nom `OPENAI_API_KEY` et activez l’accès au notebook. |
+| Erreur d’authentification ou de quota | Vérifiez la clé, le quota API et l’accès au modèle. |
+| PDF introuvable | Importez le support sous le nom exact `Cours.pdf`. |
+| Aucun texte extrait | Utilisez un PDF avec du texte sélectionnable. |
+| `products.csv` introuvable | Importez le fichier avec son nom exact, sans suffixe `(1)` ni extension `.txt`. |
+| Variable inconnue ou erreur d’import | Reprenez les cellules dans l’ordre à partir de la première erreur ; redémarrez la session si nécessaire. |
+
+Votre copie du notebook reste dans Drive. Les fichiers importés et les bibliothèques installées dépendent de la session temporaire Colab : après une réinitialisation, réimportez les fichiers et réexécutez les cellules.
+
+Contact : **redha.moulla@axia-conseil.com**.
+
+Pour poursuivre la veille en IA : [Courants de fond](https://redhamoulla.substack.com).
