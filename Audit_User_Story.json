@@ -50,13 +50,7 @@
       "position": [
         -176,
         -224
-      ],
-      "credentials": {
-        "openAiApi": {
-          "id": "deYv4UjViODZ0FIO",
-          "name": "OpenAI account"
-        }
-      }
+      ]
     },
     {
       "parameters": {
@@ -124,15 +118,12 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
   "versionId": "92cf81d8-d6d5-4451-9209-c57829d14044",
-  "meta": {
-    "instanceId": "f5247abcb45310f5788637a5ada7ddabbb7f5fd1ab837372f0bd9029a43beb1f"
-  },
   "nodeGroups": [],
   "id": "xb9sm7Q5RO0hXgq9",
   "tags": []
